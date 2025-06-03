@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import CheckoutButton from "./CheckoutButton";
 
 interface OrderSummaryProps {
     itemCount: number;
@@ -33,11 +34,7 @@ const OrderSummary = ({ itemCount, totalPrice }: OrderSummaryProps) => {
                 </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-3">
-                <Button size="lg" className="w-full" asChild>
-                    <Link href="/checkout">
-                        Proceed to Checkout
-                    </Link>
-                </Button>
+                <CheckoutButton />
                 <Button size="lg" className="w-full" variant="outline" asChild>
                     <Link href="/">
                         Continue Shopping

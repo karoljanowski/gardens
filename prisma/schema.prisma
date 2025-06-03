@@ -17,6 +17,10 @@ datasource db {
 model User {
   id            String    @id
   name          String
+  address       String
+  city          String
+  postalCode    String
+  country       String
   email         String
   emailVerified Boolean
   image         String?
@@ -24,6 +28,7 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  courses       Course[]
 
   @@unique([email])
   @@map("user")
@@ -89,4 +94,6 @@ model Course {
   modules     String[]
   price       Int
   carts       Cart[]   @relation("CartItems")
+  user        User?    @relation(fields: [userId], references: [id])
+  userId      String?
 }

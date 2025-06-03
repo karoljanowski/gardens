@@ -1,34 +1,39 @@
 'use server';
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
+import { getSession } from "./auth";
 
 export const addToCart = async (courseId: string) => {
     const cookieStore = await cookies();
     let cartId = cookieStore.get("cartId")?.value;
+    const session = await getSession();
 
-    // Create cart if it doesn't exist
     if (!cartId) {
         const cart = await prisma.cart.create({
             data: {
                 items: {
                     connect: { id: courseId }
-                }
+                },
+                userId: session?.user?.id
             },
             include: {
                 items: true
             }
         });
-        cookieStore.set("cartId", cart.id);
+
+        cookieStore.set("cartId", cart.id, {
+            httpOnly: true,
+        });
         return cart;
     }
 
-    // Add course to existing cart
     const cart = await prisma.cart.update({
         where: { id: cartId },
         data: {
             items: {
                 connect: { id: courseId }
-            }
+            },
+            userId: session?.user?.id
         },
         include: {
             items: true
@@ -53,47 +58,6 @@ export const removeFromCart = async (courseId: string) => {
                 disconnect: { id: courseId }
             }
         },
-        include: {
-            items: true
-        }
-    });
-
-    return cart;
-}
-
-export const clearCart = async () => {
-    const cookieStore = await cookies();
-    const cartId = cookieStore.get("cartId")?.value;
-
-    if (!cartId) {
-        return null;
-    }
-
-    const cart = await prisma.cart.update({
-        where: { id: cartId },
-        data: {
-            items: {
-                set: []
-            }
-        },
-        include: {
-            items: true
-        }
-    });
-
-    return cart;
-}
-
-export const getCart = async () => {
-    const cookieStore = await cookies();
-    const cartId = cookieStore.get("cartId")?.value;
-
-    if (!cartId) {
-        return null;
-    }
-
-    const cart = await prisma.cart.findUnique({
-        where: { id: cartId },
         include: {
             items: true
         }

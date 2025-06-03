@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { TCourse } from "@/lib/types";
-import { addToCart, removeFromCart, clearCart, getCart } from "@/server/cart";
+import { addToCart, removeFromCart } from "@/server/cart";
 import { toast } from "sonner";
 
 type CartState = {
@@ -8,7 +8,6 @@ type CartState = {
     isLoading: boolean;
     addToCart: (course: TCourse) => void;
     removeFromCart: (courseId: string) => void;
-    clearCart: () => void;
     getCart: () => Promise<void>;
     getTotalPrice: () => number;
 };
@@ -51,22 +50,11 @@ export const useCartStore = create<CartState>((set, get) => ({
         }
     },
 
-    clearCart: async () => {
-        try {
-            const cart = await clearCart();
-            if (cart) {
-                set({ items: cart.items });
-                toast.success('Cart cleared');
-            }
-        } catch (error) {
-            toast.error('Failed to clear cart');
-            console.error('Failed to clear cart:', error);
-        }
-    },
-
     getCart: async () => {
         try {
-            const cart = await getCart();
+            const res = await fetch("/api/cart")
+            const cart = await res.json()
+
             if (cart?.items) {
                 set({ items: cart.items, isLoading: false });
             } else {

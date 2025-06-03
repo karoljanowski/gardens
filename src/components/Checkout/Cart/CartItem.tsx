@@ -17,7 +17,7 @@ const CartItem = ({ course, onRemove }: CartItemProps) => {
                 <div className="flex gap-4 items-center">
                     <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                         <Image
-                            src={course.image}
+                            src={`/courses/${course.image}`}
                             alt={course.title}
                             fill
                             className="object-cover"

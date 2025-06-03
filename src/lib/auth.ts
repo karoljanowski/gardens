@@ -10,6 +10,22 @@ export const auth = betterAuth({
     emailAndPassword: {
         enabled: true
     },
-    plugins: [nextCookies()]
+    plugins: [nextCookies()],
+    user: {
+        additionalFields: {
+            address: {
+                type: "string",
+            },
+            city: {
+                type: "string",
+            },
+            postalCode: {
+                type: "string",
+            },
+            country: {
+                type: "string",
+            },
+        }
+    }
 });
 

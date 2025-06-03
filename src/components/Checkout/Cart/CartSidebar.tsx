@@ -1,4 +1,4 @@
-import OrderSummary from "../OrderSummary";
+import OrderSummary from "./OrderSummary";
 import BenefitsCard from "./BenefitsCard";
 
 interface CartSidebarProps {

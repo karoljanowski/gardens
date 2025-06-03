@@ -1,7 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import SignInForm from "@/components/SignIn/SignInForm"
+import SignInForm from "@/components/Auth/SignIn/SignInForm"
+import { getSession } from "@/server/auth";
+import { redirect } from "next/navigation";
 
-const SignIn = () => {
+const SignIn = async () => {
+    const session = await getSession()
+    if (session?.user) {
+        redirect("/dashboard")
+    }
     return (
         <div className="container mx-auto px-4 py-12">
             <div className="flex flex-col gap-4 justify-center items-center">

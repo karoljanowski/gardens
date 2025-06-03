@@ -8,7 +8,7 @@ const Course = ({ course }: { course: TCourse }) => {
     return (
         <div className="flex gap-24 my-24 even:flex-row-reverse group">
             <div className="flex-1 rounded-2xl overflow-hidden">
-                <Image src={course.image} alt={course.title} width={700} height={700} className="w-full h-full object-cover" />
+                <Image src={`/courses/${course.image}`} alt={course.title} width={700} height={700} className="w-full h-full object-cover" />
             </div>
             <div className="flex-1">
                 <div className="flex flex-col pb-8 justify-end h-full">

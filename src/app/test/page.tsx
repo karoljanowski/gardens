@@ -1,5 +1,6 @@
 'use client'
 import { toast } from "sonner";
+import { saveCourses } from "@/server/course";
 
 const Test = () => {
     const showAlert = () => {
@@ -7,7 +8,7 @@ const Test = () => {
     }
     return (
         <div>
-            <button onClick={showAlert}>Add to Cart</button>
+            <button onClick={saveCourses}>Add to Cart</button>
         </div>
     )
 }
