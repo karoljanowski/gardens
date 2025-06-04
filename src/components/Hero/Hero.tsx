@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Hero = () => {
     return (
-        <div className="bg-gradient-to-t from-neutral-950/10 to-emerald-900/10 -mt-28">
+        <div className="bg-gradient-to-t from-neutral-950/10 to-emerald-900/10 -mt-24">
             <div className="relative h-screen flex items-end container mx-auto">
                 <div className="absolute top-0 left-0 w-full h-full z-10">
                     <Image src="/hero7.png" alt="Hero Background" fill className="object-contain opacity-40" />

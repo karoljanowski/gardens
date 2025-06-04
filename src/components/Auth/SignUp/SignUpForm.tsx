@@ -10,13 +10,13 @@ import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-const SignUpForm = () => {
+const SignUpForm = ({ redirectToCart }: { redirectToCart: string }) => {
     const [state, action, isPending] = useActionState(signUp, undefined);
     const router = useRouter();
 
     useEffect(() => {
         if (state?.success) {
-            router.push("/checkout/payment");
+            router.push(redirectToCart == '1' ? "/cart" : "/dashboard");
             toast.success("Account created successfully");
         }
         if (state?.errors.auth) {
@@ -25,7 +25,7 @@ const SignUpForm = () => {
     }, [state]);
 
     return (
-        <Card>
+        <Card className="w-full">
             <CardContent>
                 <form action={action} className="flex flex-col gap-4">
                     <h3 className="text-lg font-medium">Account credentials</h3>
@@ -59,12 +59,10 @@ const SignUpForm = () => {
                         <LabelInput type="text" id="country" label="Country" placeholder="Enter your country" error={state?.errors?.country?.[0]} defaultValue={state?.data?.country} />
                     </div>
 
-                    <div className="flex flex-col-reverse md:flex-row gap-4">
-                        <Button className="mt-4 w-full" variant="outline">Back to cart</Button>
-                        <Button className="mt-4 w-full" type="submit" disabled={isPending}>
-                            {isPending ? <Loader2 className="animate-spin" /> : "Create account & go to payment"}
-                        </Button>
-                    </div>
+                    <Button className="mt-4 w-full" type="submit" disabled={isPending}>
+                        {isPending ? <Loader2 className="animate-spin" /> : "Create account"}
+                    </Button>
+
                 </form>
             </CardContent>
         </Card>

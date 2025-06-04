@@ -1,13 +1,18 @@
 import Logo from "@/components/Header/Logo";
 import Menu from "@/components/Header/Menu";
 import { Button } from "../ui/button";
-import { ShoppingBagIcon, UserIcon } from "lucide-react";
+import { LogOut, UserIcon } from "lucide-react";
 import Link from "next/link";
 import HeaderCart from "../Checkout/Cart/HeaderCart";
+import { signOut } from "@/server/auth";
 
-const Header = () => {
+type HeaderProps = {
+    isDashboard?: boolean
+}
+
+const Header = ({ isDashboard = false }: HeaderProps) => {
     return (
-        <div className="container mx-auto z-20 relative">
+        <div className="container mx-auto z-20 relative h-24">
             <div className="flex px-4 py-8 gap-4 items-center justify-between w-full">
                 {/* logo */}
                 <Link href="/" className="flex items-center gap-2">
@@ -18,18 +23,25 @@ const Header = () => {
                 </Link>
 
                 {/* menu */}
-                <div className="flex items-center">
-                    <Menu />
-                </div>
+                {!isDashboard && (
+                    <div className="flex items-center">
+                        <Menu />
+                    </div>
+                )}
 
-                {/* button */}
                 <div className="flex items-center gap-2">
-                    <HeaderCart />
+                    {!isDashboard && <HeaderCart />}
+                    {isDashboard ? (
+                        <Button onClick={signOut}>
+                            Logout <LogOut /> 
+                        </Button>
+                    ) : (
                     <Button asChild size="icon">
                         <Link href="/dashboard">
                             <UserIcon />
                         </Link>
                     </Button>
+                    )}
                 </div>
             </div>
         </div>

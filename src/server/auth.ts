@@ -3,6 +3,7 @@
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { cookies, headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const signUpSchema = z.object({
@@ -159,6 +160,7 @@ export const signIn = async (_: unknown, formData: FormData): Promise<{errors: R
 
 export const signOut = async () => {
     await auth.api.signOut({ headers: await headers() });
+    redirect("/");
 }
 
 export const getSession = async () => {

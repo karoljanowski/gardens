@@ -7,14 +7,17 @@ export const getCourses = cache(async () => {
     return courses;
 });
 
-export const getUserCourses = cache(async (userId: string) => {
-    const courses = await prisma.course.findMany({
+export const getUserCourses = async (userId: string) => {
+    const courses = await prisma.userCourse.findMany({
         where: {
             userId: userId
+        },
+        include: {
+            course: true
         }
     });
     return courses;
-});
+};
 
 // TODO: Remove this function
 export const saveCourses = async () => {

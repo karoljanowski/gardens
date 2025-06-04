@@ -1,4 +1,4 @@
-import { StaticImageData } from "next/image";
+import { Prisma } from "@/generated/prisma";
 
 export type TMenuItem = {
     href: string;
@@ -14,3 +14,9 @@ export type TCourse = {
     modules?: string[];
     price: number;
 }
+
+export type TUserCourse = Prisma.UserCourseGetPayload<{
+    include: {
+      course: true;
+    };
+  }>;

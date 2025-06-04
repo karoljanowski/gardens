@@ -28,7 +28,7 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
-  courses       Course[]
+  courses       UserCourse[]
 
   @@unique([email])
   @@map("user")
@@ -94,6 +94,30 @@ model Course {
   modules     String[]
   price       Int
   carts       Cart[]   @relation("CartItems")
-  user        User?    @relation(fields: [userId], references: [id])
-  userId      String?
+  userCourses UserCourse[]
+  lessons     Lesson[]
+}
+
+model Lesson {
+  id        String   @id @default(uuid())
+  title     String
+  duration  Int
+  videoUrl  String
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id])
+}
+
+model UserCourse {
+  id        String   @id @default(uuid())
+  userId    String
+  courseId  String
+  user      User     @relation(fields: [userId], references: [id])
+  course    Course   @relation(fields: [courseId], references: [id])
+  progress  Int      @default(0)
+  status    UserCourseStatus @default(IN_PROGRESS)
+}
+
+enum UserCourseStatus {
+  IN_PROGRESS
+  COMPLETED
 }

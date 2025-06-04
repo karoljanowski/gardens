@@ -182,8 +182,15 @@ exports.Prisma.CourseScalarFieldEnum = {
   description: 'description',
   image: 'image',
   modules: 'modules',
-  price: 'price',
-  userId: 'userId'
+  price: 'price'
+};
+
+exports.Prisma.UserCourseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  courseId: 'courseId',
+  progress: 'progress',
+  status: 'status'
 };
 
 exports.Prisma.SortOrder = {
@@ -200,7 +207,10 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.UserCourseStatus = exports.$Enums.UserCourseStatus = {
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -208,7 +218,8 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   Cart: 'Cart',
-  Course: 'Course'
+  Course: 'Course',
+  UserCourse: 'UserCourse'
 };
 
 /**

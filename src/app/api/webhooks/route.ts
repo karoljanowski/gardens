@@ -48,15 +48,15 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'No cart found for id' }, { status: 400 })
       }
 
-      await prisma.user.update({
-        where: {
-          id: cart.userId
-        },
-        data: {
-          courses: {
-            connect: cart.items.map((item) => ({ id: item.id }))
+      const userId = cart.userId;
+
+      cart.items.forEach(async (item) => {
+        await prisma.userCourse.create({
+          data: {
+            user: { connect: { id: userId } },
+            course: { connect: { id: item.id } },
           }
-        }
+        })
       })
       break
     default:

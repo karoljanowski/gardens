@@ -6,13 +6,13 @@ import { redirect } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
-const SignInForm = () => {
+const SignInForm = ({ redirectToCart }: { redirectToCart: string }) => {
     const [state, action, isPending] = useActionState(signIn, undefined);
 
     useEffect(() => {
         if (state?.success) {
             toast.success("Signed in successfully");
-            redirect("/dashboard");
+            redirect(redirectToCart == '1' ? "/cart" : "/dashboard");
         }
 
         if (state?.errors?.auth) {
@@ -25,7 +25,7 @@ const SignInForm = () => {
             <form action={action} className="flex flex-col gap-2">
                 <LabelInput type="email" id="email" label="Email" placeholder="Enter your email" error={state?.errors?.email?.[0]} />
                 <LabelInput type="password" id="password" label="Password" placeholder="Enter your password" error={state?.errors?.password?.[0]} />
-                <Button type="submit" disabled={isPending}>{isPending ? "Signing in..." : "Sign In"}</Button>
+                <Button className="mt-4" type="submit" disabled={isPending}>{isPending ? "Signing in..." : "Sign In"}</Button>
             </form>
         </div>
     )
