@@ -6,7 +6,10 @@ import { Button } from "../ui/button";
 import { ArrowRightIcon, BookOpen, Clock, PlayCircleIcon } from "lucide-react";
 import Link from "next/link";
 import { Progress } from "../ui/progress";
-import { TUserCourse } from "@/lib/types";
+import { TUserCourse } from "@/lib/types/course";
+import SectionHeader from "../Elements/SectionHeader";
+import { TCourseWithModulesAndLessons } from "@/lib/types/course";
+import { formatDuration } from "@/lib/utils";
 
 type CoursesListProps = {
     userId: string;
@@ -18,16 +21,12 @@ const CoursesList = async ({ userId }: CoursesListProps) => {
     return (
         <div className="w-full my-12">
             {/* Section Header */}
-            <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
-                    <BookOpen className="w-4 h-4 text-white" />
-                </div>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Your Courses</h2>
-                <div className="flex-1 h-px bg-gradient-to-r from-neutral-600 to-neutral-700"></div>
-                <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
-                    {courses.length} course{courses.length !== 1 ? 's' : ''}
-                </span>
-            </div>
+            <SectionHeader 
+                icon={<BookOpen className="w-4 h-4 text-white" />}
+                title="Your Courses"
+                description="Your courses are listed below"
+                count={courses.length}
+            />
 
             {/* Courses Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -59,7 +58,8 @@ const CourseCard = ({ userCourse }: { userCourse: TUserCourse }) => {
     )
 }
 
-const CourseProgress = ({ course, progress }: { course: Course, progress: number }) => {
+const CourseProgress = ({ course, progress }: { course: TCourseWithModulesAndLessons, progress: number }) => {
+    const totalDuration = course.modules.reduce((acc, module) => acc + module.lessons.reduce((acc, lesson) => acc + lesson.duration, 0), 0);
     return (
         <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
@@ -74,7 +74,7 @@ const CourseProgress = ({ course, progress }: { course: Course, progress: number
                 </div>
                 <div className="flex items-center gap-1">
                     <Clock className="w-3 h-3" />
-                    <span>8h 30m</span>
+                    <span>{formatDuration(totalDuration)}</span>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { TCourse } from "@/lib/types";
+import { TCourse } from "@/lib/types/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";

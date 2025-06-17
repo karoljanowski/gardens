@@ -2,7 +2,7 @@
 
 import { Button } from "../ui/button";
 import { useCartStore } from "@/stores/useCartStore";
-import { TCourse } from "@/lib/types";
+import { TCourse } from "@/lib/types/types";
 
 const CourseButton = ({ course }: { course: TCourse }) => {
     const { addToCart } = useCartStore();

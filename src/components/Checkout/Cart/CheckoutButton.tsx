@@ -46,12 +46,12 @@ const LoginButton = () => {
         <div className="flex flex-col gap-2 w-full">
             <div className="flex gap-2">
                 <Button size="lg" className="w-full" asChild>
-                    <Link href="/sign-in?from=cart">
+                    <Link href="/signin?from=cart">
                         Sign In
                     </Link>
                 </Button>
                 <Button size="lg" className="w-full" variant="secondary" asChild>
-                    <Link href="/sign-up?from=cart">
+                    <Link href="/signup?from=cart">
                         Sign Up
                     </Link>
                 </Button>

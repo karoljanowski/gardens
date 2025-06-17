@@ -13,6 +13,10 @@ export const auth = betterAuth({
     plugins: [nextCookies()],
     user: {
         additionalFields: {
+            isAdmin: {
+                type: "boolean",
+                defaultValue: false,
+            },
             address: {
                 type: "string",
             },

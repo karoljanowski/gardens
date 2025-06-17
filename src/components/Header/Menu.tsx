@@ -1,4 +1,4 @@
-import { type TMenuItem } from "@/lib/types";
+import { type TMenuItem } from "@/lib/types/types";
 import Link from "next/link";
 
 const Menu = () => {

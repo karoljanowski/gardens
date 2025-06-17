@@ -25,7 +25,7 @@ const SignInForm = ({ redirectToCart }: { redirectToCart: string }) => {
             <form action={action} className="flex flex-col gap-2">
                 <LabelInput type="email" id="email" label="Email" placeholder="Enter your email" error={state?.errors?.email?.[0]} />
                 <LabelInput type="password" id="password" label="Password" placeholder="Enter your password" error={state?.errors?.password?.[0]} />
-                <Button className="mt-4" type="submit" disabled={isPending}>{isPending ? "Signing in..." : "Sign In"}</Button>
+                <Button variant="secondary" className="mt-4" type="submit" disabled={isPending}>{isPending ? "Signing in..." : "Sign In"}</Button>
             </form>
         </div>
     )

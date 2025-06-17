@@ -1,4 +1,4 @@
-import { type TCourse } from "@/lib/types";
+import { type TCourse } from "@/lib/types/types";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { ArrowRightIcon } from "lucide-react";

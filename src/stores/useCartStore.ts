@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { TCourse } from "@/lib/types";
+import { TCourse } from "@/lib/types/types";
 import { addToCart, removeFromCart } from "@/server/cart";
 import { toast } from "sonner";
 

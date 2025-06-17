@@ -24,12 +24,13 @@ model User {
   email         String
   emailVerified Boolean
   image         String?
+  isAdmin       Boolean   @default(false)
   createdAt     DateTime
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
   courses       UserCourse[]
-
+  lessonProgress UserLessonProgress[]
   @@unique([email])
   @@map("user")
 }
@@ -87,15 +88,24 @@ model Cart {
 
 model Course {
   id          String   @id @default(uuid())
+  order       Int
   title       String
   subtitle    String
   description String
   image       String
-  modules     String[]
   price       Int
   carts       Cart[]   @relation("CartItems")
   userCourses UserCourse[]
-  lessons     Lesson[]
+  modules     Module[]
+}
+
+model Module {
+  id        String   @id @default(uuid())
+  title     String
+  order     Int
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons   Lesson[]
 }
 
 model Lesson {
@@ -103,8 +113,10 @@ model Lesson {
   title     String
   duration  Int
   videoUrl  String
-  courseId  String
-  course    Course   @relation(fields: [courseId], references: [id])
+  order     Int
+  moduleId  String
+  module    Module   @relation(fields: [moduleId], references: [id])
+  lessonProgress UserLessonProgress[]
 }
 
 model UserCourse {
@@ -115,6 +127,15 @@ model UserCourse {
   course    Course   @relation(fields: [courseId], references: [id])
   progress  Int      @default(0)
   status    UserCourseStatus @default(IN_PROGRESS)
+}
+
+model UserLessonProgress {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  lessonId  String
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  completed Boolean  @default(false)
 }
 
 enum UserCourseStatus {

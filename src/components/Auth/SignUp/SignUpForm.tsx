@@ -25,8 +25,7 @@ const SignUpForm = ({ redirectToCart }: { redirectToCart: string }) => {
     }, [state]);
 
     return (
-        <Card className="w-full">
-            <CardContent>
+        <div className="w-full">
                 <form action={action} className="flex flex-col gap-4">
                     <h3 className="text-lg font-medium">Account credentials</h3>
 
@@ -64,8 +63,7 @@ const SignUpForm = ({ redirectToCart }: { redirectToCart: string }) => {
                     </Button>
 
                 </form>
-            </CardContent>
-        </Card>
+        </div>
     )
 }
 

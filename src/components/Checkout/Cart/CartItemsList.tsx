@@ -1,4 +1,4 @@
-import { TCourse } from "@/lib/types";
+import { TCourse } from "@/lib/types/types";
 import CartItem from "./CartItem";
 
 interface CartItemsListProps {

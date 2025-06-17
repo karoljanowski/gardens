@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 
 body {
-  background: #000000;
+  background: #040404;
   color: #ffffff;
   font-family: var(--font-family);
 }
@@ -49,7 +49,7 @@ body {
   --radius: 0.625rem;
   --background: oklch(0 0 none);
   --foreground: oklch(0.985 0.002 247.839);
-  --card: oklch(0.2 0 none);
+  --card: oklch(0.15 0 none);
   --card-foreground: oklch(0.985 0.002 247.839);
   --popover: oklch(0.21 0.034 264.665);
   --popover-foreground: oklch(0.985 0.002 247.839);
@@ -58,12 +58,12 @@ body {
   --secondary: oklch(1 0 none);
   --secondary-foreground: oklch(0 0 none);
   --muted: oklch(0.278 0.033 256.848);
-  --muted-foreground: oklch(0.707 0.022 261.325);
-  --accent: oklch(0.278 0.033 256.848);
+  --muted-foreground: oklch(0.48 0 none);
+  --accent: oklch(0.2046 0 0);
   --accent-foreground: oklch(0.985 0.002 247.839);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
-  --input: oklch(0 0 none);
+  --input: oklch(0.21 0 none);
   --ring: oklch(0.551 0.027 264.364);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
