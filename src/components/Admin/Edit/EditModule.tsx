@@ -1,7 +1,6 @@
 "use client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { TModuleWithLessons, TCourseWithModulesAndLessons } from "@/lib/types/course";
 import { PlusIcon, TrashIcon } from "lucide-react";
 import EditLesson from "./EditLesson";

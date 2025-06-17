@@ -13,7 +13,11 @@ export async function GET() {
     const cart = await prisma.cart.findUnique({
         where: { id: cartId },
         include: {
-            items: true
+            items: {
+                include: {
+                    modules: true
+                }
+            }
         }
     });
 

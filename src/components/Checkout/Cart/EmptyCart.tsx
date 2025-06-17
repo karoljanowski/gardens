@@ -11,7 +11,7 @@ const EmptyCart = () => {
                     Your Cart is Empty
                 </h1>
                 <p className="text-neutral-300 mb-8">
-                    Looks like you haven't added any courses to your cart yet. 
+                    Looks like you haven&apos;t added any courses to your cart yet. 
                     Explore our courses and start your gardening journey!
                 </p>
                 <Link href="/">

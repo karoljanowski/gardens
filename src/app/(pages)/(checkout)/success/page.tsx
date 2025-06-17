@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { CheckCircle, ArrowLeft, PlayCircleIcon } from "lucide-react"
 import Link from "next/link"
 
-const Success = async ({ searchParams }: { searchParams: { session_id: string } }) => {
+const Success = async ({ searchParams }: { searchParams: Promise<{ session_id: string }> }) => {
   const { session_id } = await searchParams
 
   if (!session_id)
@@ -14,7 +14,7 @@ const Success = async ({ searchParams }: { searchParams: { session_id: string } 
     expand: ['line_items', 'payment_intent']
   })
 
-  const { status, customer_details, line_items, amount_total } = session
+  const { status, customer_details } = session
   const customerEmail = customer_details?.email
 
   if (status === 'open') {

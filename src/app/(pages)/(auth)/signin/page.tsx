@@ -1,11 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import SignInForm from "@/components/Auth/SignIn/SignInForm"
 import { getSession } from "@/server/auth";
 import { redirect } from "next/navigation";
-import Header from "@/components/Header/Header";
 import Link from "next/link";
 
-const SignIn = async ({ searchParams }: { searchParams: { redirectToCart: string } }) => {
+const SignIn = async ({ searchParams }: { searchParams: Promise<{ redirectToCart: string }> }) => {
     const { redirectToCart } = await searchParams
     const session = await getSession()
     if (session?.user) {

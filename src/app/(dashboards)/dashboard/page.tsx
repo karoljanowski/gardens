@@ -1,5 +1,4 @@
 import { getSession } from "@/server/auth";
-import { getUserCourses } from "@/server/course";
 import CoursesList from "@/components/Dashboard/CoursesList";
 import { redirect } from "next/navigation";
 
@@ -16,7 +15,7 @@ const Dashboard = async () => {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="py-8 w-full">
             <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
                 Welcome back, {session.user.name}! 👋
             </h1>

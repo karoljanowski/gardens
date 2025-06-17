@@ -1,4 +1,4 @@
-import { type TMenuItem } from "@/lib/types/types";
+import { type TMenuItem } from "@/lib/types/menu";
 import Link from "next/link";
 
 const Menu = () => {
@@ -21,7 +21,7 @@ const Menu = () => {
         }
     ]
     return (
-        <div className="flex items-center gap-16">
+        <div className="items-center gap-16 hidden md:flex">
             {items.map((item) => (
                 <Link href={item.href} key={item.label}>
                     {item.label}

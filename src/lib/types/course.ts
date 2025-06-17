@@ -1,14 +1,4 @@
-import { Prisma } from "@/generated/prisma";
-
-export type TCourse = {
-    id: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    image: string;
-    modules?: string[];
-    price: number;
-}
+import { Prisma } from "@prisma/client";
 
 export type TUserCourse = Prisma.UserCourseGetPayload<{
   include: {

@@ -1,8 +1,8 @@
-import { TCourse } from "@/lib/types/types";
+import { TCartCourse } from "@/lib/types/cart";
 import CartItem from "./CartItem";
 
 interface CartItemsListProps {
-    items: TCourse[];
+    items: TCartCourse[];
     onRemoveItem: (courseId: string) => void;
 }
 

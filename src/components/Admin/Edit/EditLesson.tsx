@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Lesson } from "@/generated/prisma";
+import { Lesson } from "@prisma/client";
 import { TCourseWithModulesAndLessons } from "@/lib/types/course";
 import { TrashIcon } from "lucide-react";
 

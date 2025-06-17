@@ -10,7 +10,7 @@ const Admin = async () => {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="w-full py-8">
             <h1 className="text-4xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <Settings className="w-8 h-8" /> Admin Panel 
             </h1>

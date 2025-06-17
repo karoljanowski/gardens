@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { isAdmin } from "@/server/admin";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest, { params }: { params: { courseId: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ courseId: string }> }) {
     const admin = await isAdmin();
     if (!admin) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

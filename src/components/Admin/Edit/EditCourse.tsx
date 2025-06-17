@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { TCourseWithModulesAndLessons } from "@/lib/types/course";
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import EditCourseInfo from "./EditCourseInfo";
 import EditCourseContent from "./EditCourseContent";

@@ -5,7 +5,7 @@ import { getSession } from "./auth";
 
 export const addToCart = async (courseId: string) => {
     const cookieStore = await cookies();
-    let cartId = cookieStore.get("cartId")?.value;
+    const cartId = cookieStore.get("cartId")?.value;
     const session = await getSession();
 
     if (!cartId) {
@@ -17,7 +17,11 @@ export const addToCart = async (courseId: string) => {
                 userId: session?.user?.id
             },
             include: {
-                items: true
+                items: {
+                    include: {
+                        modules: true
+                    }
+                }
             }
         });
 
@@ -36,7 +40,11 @@ export const addToCart = async (courseId: string) => {
             userId: session?.user?.id
         },
         include: {
-            items: true
+            items: {
+                include: {
+                    modules: true
+                }
+            }
         }
     });
 
@@ -59,7 +67,11 @@ export const removeFromCart = async (courseId: string) => {
             }
         },
         include: {
-            items: true
+            items: {
+                include: {
+                    modules: true
+                }
+            }
         }
     });
 

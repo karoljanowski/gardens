@@ -1,4 +1,3 @@
-import { Course } from "@/generated/prisma";
 import { getCoursesWithLessons } from "@/server/course";
 import { BookOpen, Edit, Plus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -16,7 +15,7 @@ const AdminCourseList = async () => {
             <SectionHeader 
                 icon={<BookOpen className="w-4 h-4 text-white" />}
                 title="Courses"
-                description="Courses are listed below"
+                badgeText="course"
                 count={courses.length}
             />
             <div className="flex flex-col gap-4">
@@ -40,7 +39,7 @@ const AdminCourseItem = ({ course }: { course: TCourseWithModulesAndLessons }) =
         <Card className="flex flex-row px-4 py-2 overflow-hidden">
             <CardHeader className="p-0 flex-1">
                 <CardTitle className="flex items-center gap-4">
-                    <Image className="rounded-lg w-16 h-16 object-cover" src={`/courses/${course.image}`} alt={course.title} width={100} height={100} />
+                    <Image className="rounded-lg w-16 h-16 object-cover" src={course.image} alt={course.title} width={100} height={100} />
                     <div className="flex flex-col">
                         <p className="text-lg font-bold">{course.title}</p>
                         <p className="text-sm text-neutral-400">{course.subtitle}</p>

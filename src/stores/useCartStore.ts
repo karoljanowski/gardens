@@ -1,12 +1,12 @@
 import { create } from "zustand";
-import { TCourse } from "@/lib/types/types";
+import { TCartCourse } from "@/lib/types/cart";  
 import { addToCart, removeFromCart } from "@/server/cart";
 import { toast } from "sonner";
 
 type CartState = {
-    items: TCourse[];
+    items: TCartCourse[];
     isLoading: boolean;
-    addToCart: (course: TCourse) => void;
+    addToCart: (courseId: string) => void;
     removeFromCart: (courseId: string) => void;
     getCart: () => Promise<void>;
     getTotalPrice: () => number;
@@ -16,9 +16,9 @@ export const useCartStore = create<CartState>((set, get) => ({
     items: [],
     isLoading: true,
 
-    addToCart: async (course: TCourse) => {
+    addToCart: async (courseId: string) => {
         const currentItems = get().items;
-        const existingItem = currentItems.find(item => item.id === course.id);
+        const existingItem = currentItems.find(item => item.id === courseId);
         
         if (existingItem) {
             toast.error('Course is already in cart');
@@ -26,7 +26,7 @@ export const useCartStore = create<CartState>((set, get) => ({
         }
 
         try {
-            const cart = await addToCart(course.id);
+            const cart = await addToCart(courseId);
             if (cart) {
                 set({ items: cart.items });
                 toast.success('Added to cart');

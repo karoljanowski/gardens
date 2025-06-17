@@ -1,9 +1,8 @@
 import { getUserCourses } from "@/server/course";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Course, UserCourse } from "@/generated/prisma";
+import { Card, CardContent } from "../ui/card";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { ArrowRightIcon, BookOpen, Clock, PlayCircleIcon } from "lucide-react";
+import { BookOpen, Clock, PlayCircleIcon } from "lucide-react";
 import Link from "next/link";
 import { Progress } from "../ui/progress";
 import { TUserCourse } from "@/lib/types/course";
@@ -24,7 +23,7 @@ const CoursesList = async ({ userId }: CoursesListProps) => {
             <SectionHeader 
                 icon={<BookOpen className="w-4 h-4 text-white" />}
                 title="Your Courses"
-                description="Your courses are listed below"
+                badgeText="course"
                 count={courses.length}
             />
 
@@ -42,7 +41,7 @@ const CourseCard = ({ userCourse }: { userCourse: TUserCourse }) => {
     const {course, progress} = userCourse
     return (
         <Card className="p-0 pb-6 overflow-hidden">
-            <Image src={`/courses/${course.image}`} alt={course.title} width={400} height={200} className="w-full h-full object-cover max-h-48" />
+            <Image src={course.image} alt={course.title} width={400} height={200} className="w-full h-full object-cover max-h-48" />
             <CardContent>
                 <h3 className="text-lg font-bold mb-2">{course.title}</h3>
                 <p className="text-sm text-gray-200 mb-4">{course.description}</p>

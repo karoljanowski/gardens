@@ -1,4 +1,4 @@
-import { TCourse } from "@/lib/types/types";
+import { TCartCourse } from "@/lib/types/cart";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -6,7 +6,7 @@ import { Trash2, BookOpen } from "lucide-react";
 import Image from "next/image";
 
 interface CartItemProps {
-    course: TCourse;
+    course: TCartCourse;
     onRemove: (courseId: string) => void;
 }
 
@@ -44,9 +44,9 @@ const CartItem = ({ course, onRemove }: CartItemProps) => {
                                         <div className="max-w-xs">
                                             <p className="font-medium mb-2">Course Modules:</p>
                                             <div className="space-y-1">
-                                                {course.modules.map((module, index) => (
-                                                    <div key={index} className="text-sm">
-                                                        {index + 1}. {module}
+                                                {course.modules.map((module) => (
+                                                    <div key={module.id} className="text-sm">
+                                                        {module.title}
                                                     </div>
                                                 ))}
                                             </div>

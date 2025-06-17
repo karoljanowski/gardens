@@ -19,9 +19,9 @@ export async function POST(request: NextRequest) {
 
   try {
     event = stripe.webhooks.constructEvent(buf, signature, webhookSecret)
-  } catch (err: any) {
-    console.error('Webhook signature verification failed.', err.message)
-    return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 })
+  } catch (err: unknown) {
+    console.error('Webhook signature verification failed.', err instanceof Error ? err.message : 'Unknown error')
+    return NextResponse.json({ error: `Webhook Error: ${err instanceof Error ? err.message : 'Unknown error'}` }, { status: 400 })
   }
 
   switch (event.type) {
