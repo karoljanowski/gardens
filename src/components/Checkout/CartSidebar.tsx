@@ -1,5 +1,5 @@
-import OrderSummary from "./OrderSummary";
-import BenefitsCard from "./BenefitsCard";
+import OrderSummary from "@/components/Checkout/OrderSummary";
+import BenefitsCard from "@/components/Checkout/BenefitsCard";
 
 interface CartSidebarProps {
     itemCount: number;

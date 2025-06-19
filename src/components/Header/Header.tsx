@@ -3,7 +3,7 @@ import Menu from "@/components/Header/Menu";
 import { Button } from "../ui/button";
 import { LogOut, UserIcon } from "lucide-react";
 import Link from "next/link";
-import HeaderCart from "../Checkout/Cart/HeaderCart";
+import HeaderCart from "../Checkout/HeaderCart";
 import { signOut } from "@/server/auth";
 
 type HeaderProps = {

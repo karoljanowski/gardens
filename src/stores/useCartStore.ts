@@ -1,70 +1,59 @@
 import { create } from "zustand";
-import { TCartCourse } from "@/lib/types/cart";  
+import { Course as TCourse } from "@prisma/client";
 import { addToCart, removeFromCart } from "@/server/cart";
 import { toast } from "sonner";
 
 type CartState = {
-    items: TCartCourse[];
-    isLoading: boolean;
-    addToCart: (courseId: string) => void;
+    items: TCourse[];
+    addToCart: (course: TCourse) => void;
     removeFromCart: (courseId: string) => void;
-    getCart: () => Promise<void>;
+    setCart: (cart: TCourse[]) => void;
     getTotalPrice: () => number;
+    initialized: boolean;
 };
 
 export const useCartStore = create<CartState>((set, get) => ({
     items: [],
-    isLoading: true,
+    initialized: false,
 
-    addToCart: async (courseId: string) => {
+    addToCart: async (course: TCourse) => {
         const currentItems = get().items;
-        const existingItem = currentItems.find(item => item.id === courseId);
+        const existingItem = currentItems.find(item => item.id === course.id);
         
         if (existingItem) {
             toast.error('Course is already in cart');
             return;
         }
 
+        set({ items: [...currentItems, course] });
+        toast.success('Added to cart');
+
         try {
-            const cart = await addToCart(courseId);
-            if (cart) {
-                set({ items: cart.items });
-                toast.success('Added to cart');
-            }
-        } catch (error) {
-            toast.error('Failed to add to cart');
-            console.error('Failed to add to cart:', error);
+            await addToCart(course.id);
+        } catch {
+            toast.error('Oops! Something went wrong while adding to cart');
+            set({ items: currentItems });
         }
     },
 
     removeFromCart: async (courseId: string) => {
+        const currentItems = get().items;
+        const newItems = currentItems.filter(item => item.id !== courseId);
+
+        set({ items: newItems });
+        toast.success('Removed from cart');
+
         try {
-            const cart = await removeFromCart(courseId);
-            if (cart) {
-                set({ items: cart.items });
-                toast.success('Removed from cart');
-            }
-        } catch (error) {
-            toast.error('Failed to remove from cart');
-            console.error('Failed to remove from cart:', error);
+            await removeFromCart(courseId);
+        } catch {
+            toast.error('Oops! Something went wrong while removing from cart');
+            set({ items: currentItems });
         }
     },
 
-    getCart: async () => {
-        try {
-            const res = await fetch("/api/cart")
-            const cart = await res.json()
-
-            if (cart?.items) {
-                set({ items: cart.items, isLoading: false });
-            } else {
-                set({ items: [], isLoading: false });
-            }
-        } catch (error) {
-            toast.error('Failed to initialize cart');
-            console.error('Failed to get cart:', error);
-            set({ items: [], isLoading: false });
-        }
+    setCart: (cart: TCourse[]) => {
+        set({ items: cart });
+        set({ initialized: true });
     },
 
     getTotalPrice: () => {

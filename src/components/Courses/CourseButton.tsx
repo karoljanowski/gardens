@@ -8,7 +8,7 @@ const CourseButton = ({ course }: { course: TCourse }) => {
     const { addToCart } = useCartStore();
 
     return (
-        <Button onClick={() => addToCart(course.id)}>
+        <Button onClick={() => addToCart(course)}>
             Add to Cart
         </Button>
     )

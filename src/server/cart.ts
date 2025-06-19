@@ -2,6 +2,22 @@
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { getSession } from "./auth";
+import { cache } from "react";
+
+export const getCart = cache(async (cartId: string) => {  
+    const cart = await prisma.cart.findUnique({
+        where: { id: cartId },
+        include: {
+            items: true
+        }
+    });
+
+    if (!cart) {
+        return null;
+    }
+
+    return cart;
+});
 
 export const addToCart = async (courseId: string) => {
     const cookieStore = await cookies();

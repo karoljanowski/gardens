@@ -1,3 +1,4 @@
+'use client';
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
@@ -65,7 +66,7 @@ const LoadingSession = () => {
     return (
         <Button size="lg" className="w-full" disabled>
             <Loader2 className="w-4 h-4 animate-spin" />
-            <span>Loading session...</span>
+            <span>Loading ...</span>
         </Button>
     )
 }
