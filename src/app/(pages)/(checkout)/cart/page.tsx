@@ -4,8 +4,10 @@ import CartItemsList from "@/components/Checkout/CartItemsList";
 import CartSidebar from "@/components/Checkout/CartSidebar";
 import { getCart } from "@/server/cart";
 import { cookies } from "next/headers";
+import { getSession } from "@/server/auth";
 
 const CartPage = async () => {
+    const session = await getSession();
     const cookieStore = await cookies()
     const cartId = cookieStore.get('cartId')?.value || null;
 
@@ -34,6 +36,7 @@ const CartPage = async () => {
                 <CartSidebar 
                     itemCount={items.length}
                     totalPrice={totalPrice}
+                    session={session?.session ?? null}
                 />
             </div>
         </div>

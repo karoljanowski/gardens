@@ -1,15 +1,16 @@
 'use client';
 import { Button } from "@/components/ui/button";
-import { useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Session } from "better-auth";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
-const CheckoutButton = () => {
-    const {data, isPending} = useSession();
-
+const CheckoutButton = ({ session }: { session: Session | null }) => {
+    const [loading, setLoading] = useState(false);
     const handleCheckout = async () => {
+        setLoading(true);
         const response = await fetch("/api/checkout_sessions", {
             method: "POST",
             headers: {
@@ -24,19 +25,17 @@ const CheckoutButton = () => {
 
         const data = await response.json();
         toast.success("Redirecting to checkout...");
+        setLoading(false);
         redirect(data.url);
     }
 
-    if (isPending) {
-        return <LoadingSession />;
-    }
-
-    if (!data?.user) {
+    if (!session?.userId) {
         return <LoginButton />;
     }
 
     return (
-        <Button size="lg" className="w-full" onClick={handleCheckout}>
+        <Button size="lg" className="w-full" onClick={handleCheckout} disabled={loading}>
+            {loading && <Loader2 className="w-4 h-4 animate-spin" />}
             Proceed to Checkout
         </Button>
     )
@@ -59,15 +58,6 @@ const LoginButton = () => {
             </div>
             <span className="text-sm text-muted-foreground text-center">You need to be logged in to checkout</span>
         </div>
-    )
-}
-
-const LoadingSession = () => {
-    return (
-        <Button size="lg" className="w-full" disabled>
-            <Loader2 className="w-4 h-4 animate-spin" />
-            <span>Loading ...</span>
-        </Button>
     )
 }
 
