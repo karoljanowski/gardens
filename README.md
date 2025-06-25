@@ -5,6 +5,7 @@
 This is a modern e-learning platform that allows users to **purchase and watch courses online**.  
 It’s designed with clean UI, secure payments, and smooth user experience in mind.
 
+Live: https://garden-courses.vercel.app/
 
 ## ⚙️ Tech Stack
 
