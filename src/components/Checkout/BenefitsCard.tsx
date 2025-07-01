@@ -14,7 +14,7 @@ const BenefitsCard = () => {
                 <CardTitle className="text-lg">Why Choose Our Courses?</CardTitle>
             </CardHeader>
             <CardContent>
-                <ul className="space-y-2 text-sm text-white">
+                <ul className="space-y-2 text-sm text-muted-foreground">
                     {benefits.map((benefit, index) => (
                         <li key={index} className="flex items-center gap-2">
                             <div className="w-2 h-2 bg-green-500 rounded-full"></div>

@@ -61,24 +61,24 @@ const EditModule = ({ module, moduleIndex, courseState, setCourseState, fieldErr
     const moduleErrorKey = `modules.${moduleIndex}`;
 
     return (
-        <div className="bg-neutral-900 rounded-lg">
+        <div className="bg-secondary rounded-lg">
             <Accordion type="single" collapsible defaultValue={module.id}>
                 <AccordionItem value={module.id} className="border-none">
-                    <AccordionTrigger className="px-4 py-3 text-white hover:no-underline flex items-center justify-between">
+                    <AccordionTrigger className="px-4 py-3 hover:no-underline flex items-center justify-between">
 
                         <div 
                             onClick={(e) => {
                                 e.stopPropagation();
                                 handleDeleteModule();
                             }}
-                            className="text-red-400 hover:text-red-300 p-1 rounded hover:bg-neutral-800 cursor-pointer transition-colors"
+                            className="text-red-400 hover:text-red-300 p-1 rounded cursor-pointer transition-colors"
                         >
                             <TrashIcon className="w-4 h-4" />
                         </div>
                         <span className="text-left mr-auto">Module {moduleIndex + 1}: {module.title}</span>
 
                     </AccordionTrigger>
-                    <AccordionContent className="px-4 py-4 border-t border-neutral-800">
+                    <AccordionContent className="px-4 py-4 border-t border-gray-300">
                         <div className="space-y-4">
                             {/* Module Title Input */}
                         
@@ -89,7 +89,7 @@ const EditModule = ({ module, moduleIndex, courseState, setCourseState, fieldErr
                                 placeholder="Enter module title"
                                 value={module.title}
                                 onChange={handleModuleTitleChange}
-                                inputClassName="bg-neutral-800"
+                                inputClassName="bg-white!"
                                 error={fieldErrors[`${moduleErrorKey}.title`]}
                             />
                             {/* Lessons Section */}
@@ -110,9 +110,9 @@ const EditModule = ({ module, moduleIndex, courseState, setCourseState, fieldErr
                                     ))}
                                     
                                     <Button 
-                                        variant="dashed" 
+                                        variant="ghost" 
                                         onClick={handleAddLesson}
-                                        className="w-full hover:bg-neutral-800"
+                                        className="w-full"
                                     >
                                         <PlusIcon className="w-4 h-4 mr-2" /> Add Lesson
                                     </Button>

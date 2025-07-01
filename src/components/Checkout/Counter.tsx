@@ -15,8 +15,8 @@ const Counter = ({ cart }: { cart: TCourse[] | null }) => {
 
 
     return (
-        <div className="bg-white h-4 w-4 rounded-full flex items-center justify-center absolute -top-1 -right-1">
-            <span className="text-xs font-bold text-black p-1 block">{count}</span>
+        <div className="bg-primary h-4 w-4 rounded-full flex items-center justify-center absolute -top-1 -right-1">
+            <span className="text-xs font-bold text-white p-1 block">{count}</span>
         </div>
     )
 }

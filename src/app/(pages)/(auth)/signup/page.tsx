@@ -9,7 +9,7 @@ const SignUp = async ({ searchParams }: { searchParams: Promise<{ redirectToCart
         redirect("/dashboard")
     }
     return (
-        <div className="flex flex-col gap-4 justify-center items-center h-full w-full mt-6">
+        <div className="flex flex-col gap-4 justify-center items-center h-full w-full bg-white p-12 rounded-xl">
             <h1 className="text-4xl font-bold">Sign Up</h1>
             <SignUpForm redirectToCart={redirectToCart} />
         </div>

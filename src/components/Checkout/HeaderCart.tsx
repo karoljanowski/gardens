@@ -1,5 +1,4 @@
 import { ShoppingBagIcon } from "lucide-react";
-import { Button } from "../ui/button";
 import Link from "next/link";
 import Counter from "@/components/Checkout/Counter";
 import { cookies } from "next/headers";
@@ -17,12 +16,10 @@ const HeaderCart = async () => {
     }
 
     return (
-        <Button asChild size="icon" className="relative">
-            <Link href="/cart">
-                <ShoppingBagIcon />
-                <Counter cart={cart} />
-            </Link>
-        </Button>
+        <Link href="/cart" className="relative">
+            <ShoppingBagIcon />
+            <Counter cart={cart} />
+        </Link>
     )
 }
 

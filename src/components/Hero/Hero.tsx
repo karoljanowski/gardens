@@ -1,30 +1,34 @@
 import { Button } from "../ui/button";
-import { ArrowRightIcon, LeafIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
     return (
-        <div className="bg-gradient-to-t from-neutral-950/10 to-emerald-900/10 -mt-24">
-            <div className="relative h-[80svh] md:h-[100svh] flex items-end container mx-auto">
-                <div className="absolute top-0 left-0 w-full h-full z-10">
-                    <Image src="/hero.webp" alt="Hero Background" fill className="object-contain opacity-50" />
+        <div className="container mx-auto">
+            <div className="bg-white rounded-xl p-12 shadow-lg flex flex-col justify-between gap-10">
+
+                <div className="flex flex-col items-center justify-center">
+                    <Image src="/hero.webp" alt="Hero" width={1400} height={500} className="w-3/4" />
+                    <h1 className="text-9xl font-bold uppercase text-center">Design courses</h1>
                 </div>
 
-                <div className="flex flex-col items-start px-4 pb-12 z-20">
-                    <p className="text-emerald-400 uppercase flex items-center gap-2 text-sm md:text-lg">
-                        <LeafIcon className="w-6 h-6" />
-                        Learn transforming outdoor spaces
+                <div className="flex flex-col items-start justify-center max-w-[50%]">
+                    <p className="text-lg">
+                        Transform your outdoor space with our expert-led courses. From beginner fundamentals to advanced techniques, unlock the skills to create stunning gardens that inspire.
                     </p>
-                    <h1 className="text-[clamp(1.75rem,_0.95rem+4vw,6rem)] leading-none font-bold uppercase mt-4">Master the Art of Garden Design</h1>
-                    <p className="text-neutral-200 mt-2 text-lg md:max-w-[60%]">Transform your outdoor space with our expert-led courses. From beginner fundamentals to advanced techniques, unlock the skills to create stunning gardens that inspire.</p>
-                    <div className="flex items-center gap-2">
-                        <Button className="mt-6" size="lg">
-                            Explore Courses
-                            <ArrowRightIcon />
+                    <div className="flex gap-4 mt-4">
+                        <Button asChild size="lg">
+                            <Link href="/courses">
+                                Explore courses
+                                <ArrowRightIcon />
+                            </Link>
                         </Button>
-                        <Button className="mt-6" variant="secondary" size="lg">
-                            Login
-                            <ArrowRightIcon />
+                        <Button asChild size="lg" variant="secondary">
+                            <Link href="/courses">
+                                Login
+                                <ArrowRightIcon />
+                            </Link>
                         </Button>
                     </div>
                 </div>

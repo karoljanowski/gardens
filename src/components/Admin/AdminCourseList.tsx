@@ -22,7 +22,7 @@ const AdminCourseList = async () => {
                 {courses.map((course) => (
                     <AdminCourseItem key={course.id} course={course} />
                 ))}
-                <Button variant="dashed" asChild className="w-full">
+                <Button asChild variant="ghost" className="w-full">
                     <Link href="/admin/course/new">
                         <Plus className="w-4 h-4" />
                         <span>Add Course</span>
@@ -42,14 +42,14 @@ const AdminCourseItem = ({ course }: { course: TCourseWithModulesAndLessons }) =
                     <Image className="rounded-lg w-16 h-16 object-cover" src={course.image} alt={course.title} width={100} height={100} />
                     <div className="flex flex-col">
                         <p className="text-lg font-bold">{course.title}</p>
-                        <p className="text-sm text-neutral-400">{course.subtitle}</p>
+                        <p className="text-sm text-muted-foreground font-normal">{course.subtitle}</p>
                     </div>
                 </CardTitle>
             </CardHeader>
             <CardContent className="flex items-center gap-2 flex-1 justify-between">
-                <p className="text-sm text-neutral-400">{course.modules.length} modules</p>
-                <p className="text-sm text-neutral-400">{lessons} lesson{lessons !== 1 ? 's' : ''}</p>
-                <p className="text-sm text-neutral-400">{course.price} $</p>
+                <p className="text-sm text-muted-foreground">{course.modules.length} modules</p>
+                <p className="text-sm text-muted-foreground">{lessons} lesson{lessons !== 1 ? 's' : ''}</p>
+                <p className="text-sm text-muted-foreground">{course.price} $</p>
                 <Button variant="secondary" size="icon" asChild>
                     <Link href={`/admin/course/${course.id}`}>
                         <Edit className="w-4 h-4" />

@@ -29,18 +29,16 @@ const Header = ({ isDashboard = false }: HeaderProps) => {
                     </div>
                 )}
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                     {!isDashboard && <HeaderCart />}
                     {isDashboard ? (
-                        <Button onClick={signOut}>
-                            Logout <LogOut /> 
+                        <Button variant="tertiary" onClick={signOut}>
+                            Logout <LogOut />
                         </Button>
                     ) : (
-                    <Button asChild size="icon">
                         <Link href="/dashboard">
                             <UserIcon />
                         </Link>
-                    </Button>
                     )}
                 </div>
             </div>

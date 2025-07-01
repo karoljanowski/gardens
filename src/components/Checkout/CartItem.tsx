@@ -14,7 +14,7 @@ const CartItem = ({ course }: CartItemProps) => {
                 <div className="flex gap-4 items-center">
                     <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                         <Image
-                            src={`/courses/${course.image}`}
+                            src={course.image}
                             alt={course.title}
                             fill
                             className="object-cover"
@@ -22,17 +22,17 @@ const CartItem = ({ course }: CartItemProps) => {
                     </div>
                     
                     <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-white truncate">
+                        <h3 className="font-semibold truncate">
                             {course.title}
                         </h3>
-                        <p className="text-sm text-neutral-400 truncate">
+                        <p className="text-sm text-muted-foreground truncate">
                             {course.subtitle}
                         </p>
                     </div>
                     
                     <div className="flex items-center gap-3">
                         <div className="text-right">
-                            <p className="font-bold text-white">${course.price}</p>
+                            <p className="font-bold">${course.price}</p>
                         </div>
                         <DeleteItem courseId={course.id} />
                     </div>

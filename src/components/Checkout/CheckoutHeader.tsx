@@ -12,7 +12,7 @@ const CheckoutHeader = ({ backToLink, buttonText, title }: CheckoutHeaderProps) 
     return (
         <div className="flex flex-col gap-4 mb-8">
             <Link href={backToLink}>
-                <Button variant="outline" size="sm">
+                <Button variant="tertiary" size="sm">
                     <ArrowLeft className="h-4 w-4 mr-2" />
                     {buttonText}
                 </Button>

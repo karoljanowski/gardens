@@ -60,7 +60,7 @@ const EditLesson = ({ lesson, moduleId, lessonIndex, moduleIndex, courseState, s
     const lessonErrorKey = `modules.${moduleIndex}.lessons.${lessonIndex}`;
 
     return (
-        <div className="bg-neutral-800 rounded-md p-3">
+        <div className="bg-gray-200 rounded-md p-3">
             <div className="flex items-center justify-between mb-3 gap-2">
                 <div className="flex-1">
                     <Input
@@ -68,6 +68,7 @@ const EditLesson = ({ lesson, moduleId, lessonIndex, moduleIndex, courseState, s
                         value={lesson.title}
                         onChange={handleLessonChange('title')}
                         placeholder="Lesson title"
+                        className="bg-white!"
                     />
                     {fieldErrors[`${lessonErrorKey}.title`] && (
                         <p className="text-red-500 text-sm mt-1">{fieldErrors[`${lessonErrorKey}.title`]}</p>
@@ -92,6 +93,7 @@ const EditLesson = ({ lesson, moduleId, lessonIndex, moduleIndex, courseState, s
                         value={lesson.videoUrl || ""}
                         onChange={handleLessonChange('videoUrl')}
                         placeholder="Video URL"
+                        className="bg-white!"
                     />
                     {fieldErrors[`${lessonErrorKey}.videoUrl`] && (
                         <p className="text-red-500 text-sm mt-1">{fieldErrors[`${lessonErrorKey}.videoUrl`]}</p>
@@ -103,6 +105,7 @@ const EditLesson = ({ lesson, moduleId, lessonIndex, moduleIndex, courseState, s
                         value={lesson.duration || ""}
                         onChange={handleLessonChange('duration')}
                         placeholder="Duration (minutes)"
+                        className="bg-white!"
                     />
                     {fieldErrors[`${lessonErrorKey}.duration`] && (
                         <p className="text-red-500 text-sm mt-1">{fieldErrors[`${lessonErrorKey}.duration`]}</p>

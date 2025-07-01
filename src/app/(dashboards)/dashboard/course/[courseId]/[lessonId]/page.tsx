@@ -1,11 +1,20 @@
-import LessonVideo from "@/components/Dashboard/Course/LessonVideo";
-import LessonSidebar from "@/components/Dashboard/Course/LessonSidebar";
-import { getCourseById } from "@/server/course";
+import LessonVideo from "@/components/Dashboard/LessonVideo";
+import CourseContent from "@/components/Dashboard/CourseContent";
+import { getCourseById, getUserLessonProgress } from "@/server/course";
+import { getSession } from "@/server/auth";
 
 const LessonPage = async ({ params }: { params: Promise<{ courseId: string, lessonId: string }> }) => {
+    const session = await getSession();
+    if (!session?.user) {
+        return;
+    }
+    const userId = session.user.id;
     const { courseId, lessonId } = await params;
-    const course = await getCourseById(courseId);
-
+    const [course, lessonProgress] = await Promise.all([
+        getCourseById(courseId),
+        getUserLessonProgress(userId, courseId)
+    ]);
+    
     if (!course) {
         return <div>Course not found</div>;
     }
@@ -20,8 +29,8 @@ const LessonPage = async ({ params }: { params: Promise<{ courseId: string, less
             <h1 className="text-3xl font-bold">{currentLesson.title}</h1>
             <p>{course.title}</p>
             <div className="grid grid-cols-1 md:grid-cols-[1fr_400px] gap-4 mt-4">
-                <LessonVideo videoUrl={currentLesson.videoUrl} />
-                <LessonSidebar modules={course.modules} currentModuleId={currentLesson.moduleId} currentLessonId={currentLesson.id} />
+                <LessonVideo videoUrl={currentLesson.videoUrl} lessonId={lessonId} userId={userId} />
+                <CourseContent courseId={courseId} modules={course.modules} currentModuleId={currentLesson.moduleId} currentLessonId={currentLesson.id} lessonProgress={lessonProgress} />
             </div>
         </div>
     )

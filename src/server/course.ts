@@ -30,6 +30,20 @@ export const getUserCourses = async (userId: string) => {
     return courses;
 };
 
+export const getUserLessonProgress = async (userId: string, courseId: string) => {
+    const progress = await prisma.userLessonProgress.findMany({
+        where: {
+            userId: userId,
+            lesson: {
+                module: {
+                    courseId: courseId
+                }
+            }
+        }
+    });
+    return progress;
+}
+
 export const getCoursesWithLessons = async () => {
     const courses = await prisma.course.findMany({
         include: {

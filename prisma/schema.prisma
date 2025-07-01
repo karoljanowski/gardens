@@ -124,7 +124,6 @@ model UserCourse {
   courseId  String
   user      User     @relation(fields: [userId], references: [id])
   course    Course   @relation(fields: [courseId], references: [id])
-  progress  Int      @default(0)
   status    UserCourseStatus @default(IN_PROGRESS)
 }
 
@@ -135,6 +134,8 @@ model UserLessonProgress {
   lessonId  String
   lesson    Lesson   @relation(fields: [lessonId], references: [id])
   completed Boolean  @default(false)
+  
+  @@unique([userId, lessonId])
 }
 
 enum UserCourseStatus {

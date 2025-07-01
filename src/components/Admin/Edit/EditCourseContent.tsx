@@ -23,7 +23,7 @@ const EditCourseContent = ({ modules, courseState, setCourseState, fieldErrors }
     return (
         <Card>
             <CardHeader className="flex flex-row justify-between items-center">
-                <CardTitle className="text-xl text-white">Modules</CardTitle>
+                <CardTitle className="text-xl">Modules</CardTitle>
                 <Button variant="secondary" onClick={handleAddModule}>
                     <PlusIcon className="w-4 h-4 mr-2" /> Add Module
                 </Button>
@@ -41,7 +41,7 @@ const EditCourseContent = ({ modules, courseState, setCourseState, fieldErrors }
                 ))}
                 
                 <Button 
-                    variant="dashed" 
+                    variant="ghost" 
                     onClick={handleAddModule}
                     className="w-full"
                 >

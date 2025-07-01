@@ -10,7 +10,7 @@ const SignIn = async ({ searchParams }: { searchParams: Promise<{ redirectToCart
         redirect("/dashboard")
     }
     return (
-        <div className="flex flex-col justify-center items-center h-full w-full">
+        <div className="flex flex-col justify-center items-center h-full bg-white p-12 rounded-xl w-full md:w-lg">
             <h1 className="text-2xl font-bold mb-2">Welcome to Gardens</h1>
             <p className="mb-6">Don&apos;t have an account? <Link href="/signup" className="underline">Sign up</Link></p>
             <div className="w-full max-w-md">

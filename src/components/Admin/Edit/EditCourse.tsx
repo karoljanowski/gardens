@@ -85,7 +85,7 @@ const EditCourse = ({ course }: { course?: TCourseWithModulesAndLessons }) => {
             />
             
             <div className="flex justify-end gap-2">
-                <Button type="button" variant="outline" onClick={handleCancel}>
+                <Button type="button" variant="tertiary" onClick={handleCancel}>
                     Cancel
                 </Button>
                 <Button type="button" variant="default" onClick={handleSave} disabled={isPending}>

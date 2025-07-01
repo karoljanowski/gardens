@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 
-const font = Montserrat({
+const font = Inter({
   variable: "--font-family",
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
