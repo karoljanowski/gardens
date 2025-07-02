@@ -31,13 +31,25 @@ export async function POST() {
       return NextResponse.json({ error: 'Cart is not associated with a user' }, { status: 404 });
     }
 
+    const userResult = await prisma.user.findUnique({
+      where: { id: cart.userId },
+      select: {
+        email: true,
+      },
+    });
+
+    const userEmail = userResult?.email;
+
+    if (!userEmail) {
+      return NextResponse.json({ error: 'User email not found' }, { status: 404 });
+    }
+
     const line_items = cart.items.map((item) => ({
       price_data: {
         currency: 'usd',
         product_data: {
           name: item.title,
           description: item.description,
-          images: [`${origin}/courses/${item.image}`],
         },
         unit_amount: item.price * 100,
       },
@@ -52,6 +64,7 @@ export async function POST() {
       metadata: {
         cartId
       },
+      customer_email: userEmail, 
     });
 
     if (!session.url) {

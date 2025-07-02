@@ -1,6 +1,8 @@
 import { getCourseById, getUserLessonProgress } from "@/server/course";
-import CourseContent from "@/components/Dashboard/CourseContent";
+import CourseContent from "@/components/Courses/CourseContent";
 import { getSession } from "@/server/auth";
+import { ArrowLeftIcon } from "lucide-react";
+import Link from "next/link";
 
 const CoursePage = async ({ params }: { params: Promise<{ courseId: string }> }) => {
     const session = await getSession();
@@ -20,6 +22,10 @@ const CoursePage = async ({ params }: { params: Promise<{ courseId: string }> })
 
     return (
         <div className="py-8 w-full">
+            <Link href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-black">
+                <ArrowLeftIcon className="w-4 h-4" />
+                Back to dashboard
+            </Link>
             <h1 className="text-4xl font-bold">
                 {course.title}
             </h1>

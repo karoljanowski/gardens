@@ -11,7 +11,7 @@ type CourseContentProps = {
     modules: TModuleWithLessons[];
     currentModuleId?: string;
     currentLessonId?: string;
-    lessonProgress: TUserLessonProgress[];
+    lessonProgress?: TUserLessonProgress[];
 }
 
 const CourseContent = ({ courseId, modules, currentModuleId, currentLessonId, lessonProgress }: CourseContentProps) => {
@@ -36,7 +36,7 @@ type CourseContentModuleProps = {
     courseId: string;
     module: TModuleWithLessons;
     currentLessonId?: string;
-    lessonProgress: TUserLessonProgress[];
+    lessonProgress?: TUserLessonProgress[];
 }
 
 const CourseContentModule = ({ courseId, module, currentLessonId, lessonProgress }: CourseContentModuleProps) => {
@@ -68,11 +68,11 @@ type LessonSidebarLessonProps = {
     courseId: string;
     lesson: Lesson;
     currentLesson?: boolean;
-    lessonProgress: TUserLessonProgress[];
+    lessonProgress?: TUserLessonProgress[];
 }
 
 const LessonSidebarLesson = ({ courseId, lesson, currentLesson, lessonProgress }: LessonSidebarLessonProps) => {
-    const lessonCompleted = lessonProgress.some((progress) => progress.lessonId === lesson.id && progress.completed);
+    const lessonCompleted = lessonProgress?.some((progress) => progress.lessonId === lesson.id && progress.completed);
     return (
         <Link href={`/dashboard/course/${courseId}/${lesson.id}`} className="flex gap-2 items-center rounded-md hover:bg-gray-300/50">
             <div className={cn("flex items-center bg-gray-300 rounded-md p-2", currentLesson && "bg-yellow-500", lessonCompleted && "bg-green-500")}>

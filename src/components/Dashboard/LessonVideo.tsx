@@ -5,11 +5,19 @@ import { Slider } from "../ui/slider";
 import { useEffect, useRef, useState } from "react";
 import { completeLesson } from "@/server/lesson";
 
-const LessonVideo = ({ videoUrl, lessonId, userId }: { videoUrl: string, lessonId: string, userId: string }) => {
+type LessonVideoProps = {
+    videoUrl: string;
+    lessonId: string;
+    userId: string;
+    isLessonCompleted: boolean;
+}
+
+const LessonVideo = ({ videoUrl, lessonId, userId, isLessonCompleted }: LessonVideoProps) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
+    const [lessonCompleted, setLessonCompleted] = useState(isLessonCompleted);
 
     const handlePlay = () => {
         if (videoRef.current) {
@@ -26,6 +34,12 @@ const LessonVideo = ({ videoUrl, lessonId, userId }: { videoUrl: string, lessonI
         if (videoRef.current) {
             setDuration(videoRef.current.duration);
             setCurrentTime(videoRef.current.currentTime);
+            
+            const remainingTime = videoRef.current.duration - videoRef.current.currentTime;
+            if (remainingTime < 5 && !lessonCompleted && videoRef.current.duration > 0) {
+                setLessonCompleted(true);
+                completeLesson(lessonId, userId);
+            }
         }
     }
 
@@ -50,19 +64,13 @@ const LessonVideo = ({ videoUrl, lessonId, userId }: { videoUrl: string, lessonI
                 setDuration(video.duration || 0);
             };
 
-            const handleEnded = () => {
-                completeLesson(lessonId, userId);
-            };
-
             video.addEventListener('loadedmetadata', handleLoadedMetadata);
-            video.addEventListener('ended', handleEnded);
 
             return () => {
                 video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-                video.removeEventListener('ended', handleEnded);
             };
         }
-    }, [lessonId, userId]);
+    }, [lessonId, userId, lessonCompleted]);
 
     return (
         <div className="w-full h-full rounded-lg overflow-hidden flex flex-col">

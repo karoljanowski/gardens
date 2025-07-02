@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { ArrowRightIcon } from "lucide-react";
 import CourseButton from "./CourseButton";
+import Link from "next/link";
 
 const Course = ({ course }: { course: TCourse }) => {
     return (
@@ -17,9 +18,11 @@ const Course = ({ course }: { course: TCourse }) => {
                     <p className="text-muted-foreground mt-1 text-sm sm:text-base">{course.description}</p>
                     <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 mt-4">
                         <CourseButton course={course} />
-                        <Button variant="tertiary" className="text-sm lg:text-base">
-                            View Course
-                            <ArrowRightIcon className="w-4 h-4 lg:w-5 lg:h-5" />
+                        <Button variant="tertiary" className="text-sm lg:text-base cursor-pointer" asChild>
+                            <Link href={`/course/${course.id}`}>
+                                View Course
+                                <ArrowRightIcon className="w-4 h-4 lg:w-5 lg:h-5" />
+                            </Link>
                         </Button>
                     </div>
                 </div>
