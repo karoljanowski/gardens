@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { getSession } from "./auth";
 import { cache } from "react";
+import { revalidatePath } from "next/cache";
 
 export const getCart = cache(async (cartId: string) => {  
     const cart = await prisma.cart.findUnique({
@@ -24,6 +25,7 @@ export const addToCart = async (courseId: string) => {
     const cartId = cookieStore.get("cartId")?.value;
     const session = await getSession();
 
+    revalidatePath("/cart");
     if (!cartId) {
         const cart = await prisma.cart.create({
             data: {
@@ -74,6 +76,8 @@ export const removeFromCart = async (courseId: string) => {
     if (!cartId) {
         return null;
     }
+
+    revalidatePath("/cart");
 
     const cart = await prisma.cart.update({
         where: { id: cartId },

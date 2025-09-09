@@ -18,7 +18,7 @@ const Course = ({ course }: { course: TCourse }) => {
                     <p className="text-muted-foreground mt-1 text-sm sm:text-base">{course.description}</p>
                     <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 mt-4">
                         <CourseButton course={course} />
-                        <Button variant="tertiary" className="text-sm lg:text-base cursor-pointer" asChild>
+                        <Button variant="secondary" className="text-sm lg:text-base cursor-pointer border-none shadow-none" asChild>
                             <Link href={`/course/${course.id}`}>
                                 View Course
                                 <ArrowRightIcon className="w-4 h-4 lg:w-5 lg:h-5" />

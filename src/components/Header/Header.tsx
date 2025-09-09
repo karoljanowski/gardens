@@ -8,11 +8,12 @@ import { signOut } from "@/server/auth";
 
 type HeaderProps = {
     isDashboard?: boolean
+    isHome?: boolean
 }
 
-const Header = ({ isDashboard = false }: HeaderProps) => {
+const Header = ({ isDashboard = false, isHome = false }: HeaderProps) => {
     return (
-        <div className="container mx-auto z-20 relative h-24">
+        <div className={`container mx-auto z-20 h-24 ${isHome ? 'fixed text-white' : 'sticky text-black'} top-0 left-0 right-0`}>
             <div className="flex px-4 py-8 gap-4 items-center justify-between w-full">
                 {/* logo */}
                 <Link href="/" className="flex items-center gap-2">

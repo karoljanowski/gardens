@@ -1,13 +1,15 @@
 import Courses from "@/components/Courses/Courses";
 import Header from "@/components/Header/Header";
-import Hero from "@/components/Hero/Hero";
+import About from "@/components/Home/About";
+import Hero from "@/components/Home/Hero";
 
 const Home = async () => {
   return (
     <>
-      <Header />
+      <Header isHome={true} />
       <main>
         <Hero />
+        <About />
         <Courses />
       </main>
     </>
